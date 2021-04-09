@@ -9,7 +9,6 @@
  */
 
 #include <string.h>
-#include <err.h>
 #include "../cslib/genlib.h"
 
 static void PigLatin(char *word, char buffer[], int bufferSize) {
