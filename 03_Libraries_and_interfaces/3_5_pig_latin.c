@@ -1,3 +1,45 @@
+#include <stdio.h>
+#include <string.h>
+#include "genlib.h"
+
+#define MaxWord 100
+
+/**
+ * Functioin: IsVowel
+ * Usage: IsVowel(char cp);
+ * ------------------------
+ * This function returns 1 if a cp is a vowel returns zero otherwise.
+ */
+
+int IsVowel(char *cp){
+   
+   char vowels[] = "aeiouy";
+
+   int i;
+   for (i = 0; vowels[i] != '\0'; i++){
+           printf("%d\n", vowels[i]);       
+   }
+   return(1);
+}
+/**
+ * Function: FindFirstVowel
+ * Usage: vp = FindFIrstVowel(word);
+ * ---------------------------------
+ * This function returns a pointer of the first vowel in word.
+ * If word does not contain a vowel, FindFistVowel returns NULL.
+ */
+
+static char *FindFirstVowel(char *word){
+    
+    char *cp;
+    
+     for (cp = word; *cp != '\0'; cp++){
+         /* I don't see anywhere IsVowel is defined */
+         if (IsVowel(*cp)) return(cp);
+     }
+     return (NULL);
+}
+
 /**
  * Function: PigLatin
  * Usage: PigLatin(word, buffer, bufferSize)
@@ -8,13 +50,10 @@
  * overflow and generates an error if it occurs
  */
 
-#include <string.h>
-#include "../cslib/genlib.h"
-
 static void PigLatin(char *word, char buffer[], int bufferSize) {
     char *vp;
     int wordLength;
-
+    
     vp = FindFirstVowel(word);
     wordLength = strlen(word);
     
@@ -34,6 +73,16 @@ static void PigLatin(char *word, char buffer[], int bufferSize) {
     } else {
         strcpy(buffer, vp);
         strncat(buffer, word, vp - word);
-        strcat(buffer, "ay")
+        strcat(buffer, "ay");
     }
+}
+
+int main(){
+    string word;
+    char translationBuffer[MaxWord + 1];
+
+    word = "Hello";
+    
+    PigLatin(word, translationBuffer, MaxWord + 1);
+    printf("Pig Latin: %s\n", translationBuffer);
 }
